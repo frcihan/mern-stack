@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MediaCard } from "../components/MediaCard";
 import { Tag } from "antd";
 const { CheckableTag } = Tag;
@@ -7,6 +7,12 @@ const tagsData = ["Any", "Animals", "Arch", "Nature", "People", "Tech"];
 
 const BookList = () => {
   const [selectedTag, setSelectedTag] = useState(["Any"]);
+
+  useEffect(() => {
+    fetchData("/api/books").then((data) => {
+      console.log("data", data);
+    });
+  }, []);
 
   const handleChange = (tag, checked) => {
     const nextSelectedTag = checked ? tag : "Any";
